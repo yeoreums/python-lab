@@ -1,0 +1,27 @@
+1. computer pick a number
+2. user should guess that number in n times (depends on set range)
+3. if user pick higher than picked number, computer says higher
+4. if user pick lower than picked number, computer says lower
+5. if user guess the number in n times, user win and print you win
+6. if user guess the wrong in n times, print you lose
+
+
+pseudocode
+
+set number = random between 1 - 100
+
+while number of guess < set number:
+ask user to guess
+if user guess number is higher than set number
+print higher
+
+if user guess number is lower than set number
+print lower
+
+if user guess number == set number
+break
+print you win
+
+if number of guess >= set number
+break
+print you lose
