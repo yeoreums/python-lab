@@ -30,7 +30,8 @@ def main():
         print("2. Show highest category")
         print("3. Show categories above threshold")
         print("4. Add purchase")
-        print("5. Exit")
+        print("5. Delete purchases")
+        print("6. Exit")
 
         choice = input("Choose an option: ")
 
@@ -50,8 +51,11 @@ def main():
         
         elif choice == "4":
             add_purchase("purchases.txt", purchases)
-
+        
         elif choice == "5":
+            delete_purchases("purchases.txt", purchases)
+
+        elif choice == "6":
             break
         else:
             print("Invalid choice")
@@ -101,6 +105,33 @@ def add_purchase(filename, purchases):
 
     print("Purchase added.")
 
+def delete_purchases(filename, purchases):
+    if not purchases:
+        print("No purchases to delete")
+        return
+    
+    for i, (category, amount) in enumerate(purchases, start=1):        
+        print(i, category, amount)
+
+    while True:
+        try:
+            num = int(input("Number to delete?: "))
+            # Better version: if 1<= num <= len(purchases): 
+            if num >= 1 and num <= len(purchases):
+                break
+            else:
+                print("Invalid number")
+                continue
+        except ValueError:
+            print("Enter a valid number")
+    
+    index = num - 1
+    removed = purchases.pop(index)
+    print("Deleted:",removed)
+        
+    with open(filename, "w") as f:
+        for category, amount in purchases:
+            f.write(f"{category},{amount}\n")
 
 if __name__ == "__main__":
     main()
