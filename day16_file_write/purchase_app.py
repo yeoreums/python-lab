@@ -31,7 +31,8 @@ def main():
         print("3. Show categories above threshold")
         print("4. Add purchase")
         print("5. Delete purchases")
-        print("6. Exit")
+        print("6. Edit purchases")
+        print("7. Exit")
 
         choice = input("Choose an option: ")
 
@@ -56,6 +57,9 @@ def main():
             delete_purchases("purchases.txt", purchases)
 
         elif choice == "6":
+            edit_purchase("purchases.txt", purchases)
+
+        elif choice == "7":
             break
         else:
             print("Invalid choice")
@@ -132,6 +136,43 @@ def delete_purchases(filename, purchases):
     with open(filename, "w") as f:
         for category, amount in purchases:
             f.write(f"{category},{amount}\n")
+
+def edit_purchase(filename, purchases):
+    if not purchases:
+        print("No purchases to edit")
+        return
+
+    for i, (category, amount) in enumerate(purchases, start=1):
+        print(i, category, amount)
+    
+    while True:
+        try:
+            num = int(input("Number to edit?: "))
+            if 1 <= num <= len(purchases):
+                break
+            else:
+                print("Invalid number")
+        except ValueError:
+            print("Enter a valid number")
+        
+    index = num - 1
+    new_category = input("New category: ")
+
+    while True:
+        try:
+            new_amount = int(input("New amount: "))
+            break
+        except ValueError:
+            print("Enter a valid number")
+
+    purchases[index] = (new_category, new_amount)
+
+
+    with open(filename, "w") as f:
+        for category, amount in purchases:
+            f.write(f"{category},{amount}\n")
+
+    print("Purchase updated.")
 
 if __name__ == "__main__":
     main()
