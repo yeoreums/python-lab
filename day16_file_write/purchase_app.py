@@ -33,6 +33,7 @@ def main():
         print("5. Delete purchases")
         print("6. Edit purchases")
         print("7. Exit")
+        print("8. Show all purchases")
 
         choice = input("Choose an option: ")
 
@@ -58,6 +59,9 @@ def main():
 
         elif choice == "6":
             edit_purchase("purchases.txt", purchases)
+
+        elif choice == "8":
+            show_all_purchases(purchases)
 
         elif choice == "7":
             break
@@ -173,6 +177,14 @@ def edit_purchase(filename, purchases):
             f.write(f"{category},{amount}\n")
 
     print("Purchase updated.")
+
+def show_all_purchases(purchases):
+    if not purchases:
+        print("No purchases found")
+        return
+
+    for i, (category, amount) in enumerate(purchases, start=1):
+        print(i, category, amount)
 
 if __name__ == "__main__":
     main()
