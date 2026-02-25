@@ -1,0 +1,6 @@
+food,7
+transport,5
+food,10
+entertainment,20
+transport,15
+food,8
