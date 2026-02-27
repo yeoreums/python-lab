@@ -27,14 +27,8 @@ def parse_rows(lines):
 def group_by_category(rows):
     totals = {}
 
-    for row in rows:
-        category = row[2]
-        amount = row[3]
-
-        if category not in totals:
-            totals[category] = 0
-
-        totals[category] += amount
+    for _, _, category, amount in rows:
+        totals[category] = totals.get(category, 0) + amount
 
     return totals
 
